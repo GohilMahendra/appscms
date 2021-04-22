@@ -19,35 +19,15 @@ import {
   Button,
 } from 'react-native';
 
-import I18n from "react-native-i18n";
 import {ModelView} from "react-native-3d-model-view";
 import * as RNLocalize from "react-native-localize";
-
+import {  } from "i18n-js";
 export default function App()
  {
  
 
   
-  I18n.fallbacks = true;
-
-  I18n.locale="fr"
-I18n.translations = {
-  en: {
-    greeting: 'Hi!',
-    hi:"hi"
-  },
-  fr: {
-    greeting: 'Bonjour!',
-    hi:"fr"
-  },
-
-  gj:
-  {
-    greeting: 'સુપ્રભાત',
-    hi:"fin"
-  }
-}
-
+ 
 const changeLoc=()=>
 {
   I18n.locale="en"
@@ -57,13 +37,13 @@ const changeLoc=()=>
   return (
     <SafeAreaView style={{flex:1}}>
    
+
+   
  
-   <Text>{I18n.t('greeting')}</Text>
-    <Text>{RNLocalize.getCurrencies()}</Text>
-    <Text>{I18n.l("currency", 1990.99)}</Text>
+    <Text>{RNLocalize.getTemperatureUnit()}</Text>
    
     <Button title={"change lang"}
-    onPress={()=>changeLoc()}
+  
     ></Button>
     </SafeAreaView>
 
