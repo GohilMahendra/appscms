@@ -10,6 +10,7 @@ workflows:
                 XCODE_SCHEME: "ARAPP"
             node: latest
         scripts:
+            - chmod +x ./gradlew
             - npm install
            
             - echo "sdk.dir=$HOME/programs/android-sdk-macosx" > "$FCI_BUILD_DIR/android/local.properties"
