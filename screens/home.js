@@ -51,6 +51,7 @@ const home=()=>
         setdata( JSON.parse( LANAGUAGE))
 
 
+        
 
     }
 

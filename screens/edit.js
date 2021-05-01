@@ -14,35 +14,6 @@ const edit=()=>
 
 {
 
-
-
-
-    const languages=JSON.parse(item)
-    
-    console.log(languages)
-   const [item,setitem]=useState()
-
-
-
-    useEffect
-    (()=>
-        {
-              
-    try
-    {
- AsyncStorage.getItem('local').then(res=>{setitem(res)}).catch(err=>console.log(err))
- }
-    catch(err)
-    {
-
-    }
-        }
-        ,[item]
-    )
-
-
-
-    
     const {height,width}=Dimensions.get('screen')
 
     const [tag,settag]=React.useState()

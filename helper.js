@@ -8,7 +8,7 @@ import { useEffect } from 'react'
 
 
 
-const helper=()=>
+const helper=(props)=>
 {
 
     const [data,setdata]=React.useState('')
@@ -32,7 +32,7 @@ const helper=()=>
     console.log(data+'data')
 
 }
-export default helper(data)
+export default helper
 
 
 
