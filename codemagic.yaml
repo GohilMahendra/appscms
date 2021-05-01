@@ -9,6 +9,7 @@ workflows:
                 XCODE_WORKSPACE: "ARAPP"
                 XCODE_SCHEME: "ARAPP"
             node: latest
+            xcode: latest
         scripts:
             - chmod +x ./gradlew
             - npm install
