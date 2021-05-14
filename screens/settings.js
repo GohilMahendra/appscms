@@ -1,26 +1,42 @@
 import React from "react";
 import { useState } from "react";
-import { Dimensions, Text,TouchableOpacity,View } from "react-native";
+import { Alert, Dimensions, Text,BackHandler,TouchableOpacity,View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { set } from "react-native-reanimated";
 import { useEffect } from "react";
-import languages from "../translation";
+import {changeLang} from "../translation";
+
 import * as loca   from "react-native-localization";
-const settings=()=>
+import localization from "../localization";
+import I18n from "i18n-js";
+import { NavigationContainer } from "@react-navigation/native";
+const settings=({navigation})=>
 
 
 
 {
 
+
+
+    
     const setLanguageAsync=async(lang)=>
     {
 
+    
         await AsyncStorage.setItem('language',lang)
 
 
 
+
+      I18n.locale=lang
+
+ 
+      
+      console.log(I18n.t('welcome'))
        setLanguage(lang)
-       languages.setLanguage(lang)
+
+       alert('language changed to '+ lang)
+  //     languages.setLanguage(lang)
     }
 
 
@@ -32,6 +48,26 @@ const settings=()=>
         
     }
 
+    // useEffect(() => {
+    //     const backAction = () => {
+    //       Alert.alert("Hold on!", "Are you sure you want to go back?", [
+    //         {
+    //           text: "Cancel",
+    //           onPress: () => null,
+    //           style: "cancel"
+    //         },
+    //         { text: "YES", onPress: () => navigation.push('home') }
+    //       ]);
+    //       return true;
+    //     };
+    
+    //     const backHandler = BackHandler.addEventListener(
+    //       "hardwareBackPress",
+    //       backAction
+    //     );
+    
+    //     return () => backHandler.remove();
+    //   }, []);
 useEffect
 (
     ()=>
@@ -45,10 +81,11 @@ const [language,setLanguage]=useState()
     
         
         <View style={{flex:1}}>
-            <Text style={{fontStyle:'italic',fontSize:25,marginTop:height/5,alignSelf:"center"}}>SELECT LANAGUAGE</Text>
+            <Text style={{fontStyle:'italic',fontSize:25,
+            marginTop:height/5,alignSelf:"center"}}>SELECT LANAGUAGE</Text>
             <TouchableOpacity
             onPress={()=>setLanguageAsync('en')}
-            style={{width:width-40,margin:20,backgroundColor:(language=='en')?"#808000":"#00FFFF",
+            style={{width:width-40,margin:20,backgroundColor:(language=='en')?"#00BFFF":"#fff",
             alignItems:'center',justifyContent:"center"
             ,height:50,borderRadius:20}}
 
@@ -56,7 +93,7 @@ const [language,setLanguage]=useState()
             ><Text>ENGLISH</Text></TouchableOpacity>
              <TouchableOpacity
               onPress={()=>setLanguageAsync('fr')}
-            style={{width:width-40,margin:20,backgroundColor:(language=='fr')?"#808000":"#00FFFF",
+            style={{width:width-40,margin:20,backgroundColor:(language=='fr')?"#00BFFF":"#fff",
             alignItems:'center',justifyContent:"center"
             ,height:50,borderRadius:20}}
 
@@ -64,7 +101,7 @@ const [language,setLanguage]=useState()
             ><Text>FRENCH</Text></TouchableOpacity>
              <TouchableOpacity
               onPress={()=>setLanguageAsync('gj')}
-            style={{width:width-40,margin:20,backgroundColor:(language=='gj')?"#808000":"#00FFFF",
+            style={{width:width-40,margin:20,backgroundColor:(language=='gj')?"#00BFFF":"#fff",
             alignItems:'center',justifyContent:"center"
             ,height:50,borderRadius:20}}
 

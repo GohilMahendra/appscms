@@ -4,20 +4,29 @@ import { Dimensions, Text,TextInput,TouchableOpacity,View } from "react-native";
 import en from '../localization/en.json'
 import fr from '../localization/fr.json'
 import gj from '../localization/gj.json'
-import languages from '../translation'
+import languages, { changeLang } from '../translation'
 
 import fs from 'react-native-fs'
 import { useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useEffect } from "react/cjs/react.production.min";
+import translation from "../translation";
+import localization from "../localization";
+import ReadFromLocalDB from "../translation";
+import I18n from "i18n-js";
 const edit=()=>
 
 {
 
+
+
+
+ 
+   
     const {height,width}=Dimensions.get('screen')
 
-    const [tag,settag]=React.useState()
-    const [welcomen,setwelcome]=React.useState()
+    const [tag,settag]=React.useState('étiqueter')
+    const [welcome,setwelcome]=React.useState('Bienvenue')
     
     //   fs.writeFile(path+'/gj.json',JSON.stringify(gj), 'utf8')
     // .then((success) => {
@@ -28,8 +37,36 @@ const edit=()=>
     // });
 
 
-    const changeSentence=()=>
+    const changeSentence=async()=>
     {
+
+
+
+
+        var data=await ReadFromLocalDB()
+
+     
+        
+
+    
+        try
+        {
+
+            I18n.reset()
+            I18n.translations=data
+       await AsyncStorage.setItem('langdata',JSON.stringify(data))
+
+
+        }
+        catch(
+err
+        )
+        {
+
+            console.log(err)
+        }
+
+
         
     }
 
@@ -84,7 +121,10 @@ const edit=()=>
 
             </TextInput>
         
-            <TouchableOpacity style={{width:width/5,height:50
+            <TouchableOpacity
+            
+            onPress={()=>changeSentence()}
+            style={{width:width/5,height:50
                 ,backgroundColor:'#ffa45a',borderRadius:20,
                 justifyContent:"center",
                 alignItems:'center',alignSelf:'center'}}>

@@ -1,55 +1,35 @@
-import { translate } from "i18n-js";
-import React from "react";
-import { Dimensions, Image, ImageComponent, Text,View } from "react-native";
-import LocalizedStrings from "react-native-localization";
 
-import * as RNLocalize from "react-native-localize";
-
-import fs from 'react-native-fs'
-import { getLanguages } from "react-native-i18n";
-import fr from './localization/fr.json'
-import en from './localization/en.json'
-import gj from './localization/gj.json'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect } from "react";
-import {data} from './helper'
+import i18n from 'i18n-js'
 
 
-en.welcome="ds"
-let itemx=""
-
-const getdata=()=>
+export async function gettranslation()
 {
-
-
-
-
-    var item=[]
-    AsyncStorage.getItem('local').then(
-        (res)=>{
-            item.push(res)
-        }
-    ).catch(err=>console.log(err))
-
-if(item !== null)
-{
-
-    return (item)
+    const lang=await ReadFromLocalDB()
+   
+    i18n.translations=lang
 }
 
-return {}
+export async function addTranslation({obj})
+{
+
+  try{
+
+    await AsyncStorage.setItem("langdata",JSON.stringify(obj))
+  }
+  catch(err)
+  {
+    console.log(err)
+  }
+
+
 }
 
+const ReadFromLocalDB = async () => {
+  const lang=await AsyncStorage.getItem('langdata')
+  
+  return   (JSON.parse(lang))
+ }
 
-
-
-
-
-var p=getdata()
-console.log(JSON.stringify(p)+'uu')
-languages={en,fr,gj}
-
-
-
-
-export default new LocalizedStrings(languages)
+ export default ReadFromLocalDB
